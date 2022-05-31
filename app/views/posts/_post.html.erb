@@ -3,6 +3,8 @@
     <%= post.title %>
   </h2>
 
+  <h6>posted by <%= link_to post.user.name, user_path(post.user) %></h6>
+
   <h6><%= pluralize(post.views, "view") %></h6>
 
   <div>
