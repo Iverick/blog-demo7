@@ -1,9 +1,14 @@
 <div class="comment-<%= comment.id %> container"
      style="border: 1px solid black; padding: 1em; margin: 1em;">
   <%= comment.user.name %><br />
-  <span>Posted <%= time_ago_in_words(comment.created_at) %></span>
+  <% if (comment.updated_at - comment.created_at) > 1 %>
+    <span>Updated <%= time_ago_in_words(comment.updated_at) %> ago</span>
+  <% else %>
+    <span>Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+  <% end %>
   <% if current_user == comment.user %>
-    <div class="button-group float-end">
+    <div class="btn-group float-end">
+      <%= link_to "Edit", nil, remote: true, class: "btn  btn-sm btn-secondary" %>
       <%= button_to "Delete", [post, comment], class: "btn btn-sm btn-danger", method: :delete %>
     </div>
   <% end %>
